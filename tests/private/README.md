@@ -14,6 +14,7 @@ No providers.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_private"></a> [private](#module\_private) | ../.. | n/a |
+| <a name="module_private-explicitly"></a> [private-explicitly](#module\_private-explicitly) | ../.. | n/a |
 
 ## Resources
 

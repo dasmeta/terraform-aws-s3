@@ -5,7 +5,7 @@ variable "name" {
 
 variable "acl" {
   type        = string
-  default     = null # "private"
+  default     = "private"
   description = "The acl config for bucket, NOTE: 'acl' conflicts with 'grant' and 'owner'."
 }
 
