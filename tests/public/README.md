@@ -14,6 +14,7 @@ No providers.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_public"></a> [public](#module\_public) | ../.. | n/a |
+| <a name="module_public-read"></a> [public-read](#module\_public-read) | ../.. | n/a |
 
 ## Resources
 

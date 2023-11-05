@@ -103,7 +103,7 @@ module "my_bucket" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_acl"></a> [acl](#input\_acl) | The acl config for bucket, NOTE: 'acl' conflicts with 'grant' and 'owner'. | `string` | `null` | no |
+| <a name="input_acl"></a> [acl](#input\_acl) | The acl config for bucket, NOTE: 'acl' conflicts with 'grant' and 'owner'. | `string` | `"private"` | no |
 | <a name="input_block_public_acls"></a> [block\_public\_acls](#input\_block\_public\_acls) | Whether Amazon S3 should block public ACLs for this bucket. | `bool` | `false` | no |
 | <a name="input_block_public_policy"></a> [block\_public\_policy](#input\_block\_public\_policy) | Whether Amazon S3 should block public bucket policies for this bucket. | `bool` | `false` | no |
 | <a name="input_bucket_files"></a> [bucket\_files](#input\_bucket\_files) | Initial content for bucket, use acl and pattern params if you need more control. | <pre>object({<br>    path = string<br>  })</pre> | <pre>{<br>  "path": ""<br>}</pre> | no |
