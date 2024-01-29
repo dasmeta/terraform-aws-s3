@@ -7,7 +7,7 @@ locals {
 
 module "bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
-  version = "3.1.0"
+  version = "4.1.0"
 
   bucket                   = var.name
   acl                      = local.acl
