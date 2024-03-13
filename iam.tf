@@ -1,6 +1,6 @@
 module "iam_user" {
   source  = "dasmeta/modules/aws//modules/aws-iam-user"
-  version = "0.36.1"
+  version = "2.13.0"
 
   create_user   = var.create_iam_user
   username      = local.iam_user_name
