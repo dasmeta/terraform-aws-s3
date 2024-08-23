@@ -9,6 +9,18 @@ variable "acl" {
   description = "The acl config for bucket, NOTE: 'acl' conflicts with 'grant' and 'owner'."
 }
 
+variable "control_object_ownership" {
+  type        = bool
+  default     = false
+  description = "Manage S3 Bucket Ownership Controls on this bucket or not."
+}
+
+variable "object_ownership" {
+  type        = string
+  default     = "BucketOwnerPreferred"
+  description = "Object ownership."
+}
+
 variable "ignore_public_acls" {
   description = "Whether Amazon S3 should ignore public ACLs for this bucket."
   type        = bool

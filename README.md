@@ -9,8 +9,8 @@ Creates AWS S3 bucket and if there is need IAM user with appropriated accesses t
 ```terraform
 
 module "my_bucket" {
-  source = "dasmeta/modules/aws//modules/s3"
-  version = "0.26.0"
+  source = "dasmeta/s3/aws"
+  version = "2.0.0"
 
   name = "my-files-bucket"
 }
@@ -30,8 +30,8 @@ output "iam_user_arn" {
 
 ```terraform
 module "my_bucket" {
-  source = "dasmeta/modules/aws//modules/s3"
-  version = "0.26.0"
+  source = "dasmeta/s3/aws"
+  version = "2.0.0"
 
   name = "my-files-bucket"
 
@@ -52,8 +52,8 @@ module "my_bucket" {
 
 ```terraform
 module "my_bucket" {
-  source = "dasmeta/modules/aws//modules/s3"
-  version = "0.36.2"
+  source = "dasmeta/s3/aws"
+  version = "2.0.0"
 
   name = "my-website"
 
@@ -76,19 +76,19 @@ module "my_bucket" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.43 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.43 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 5.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_bucket"></a> [bucket](#module\_bucket) | terraform-aws-modules/s3-bucket/aws | 3.1.0 |
+| <a name="module_bucket"></a> [bucket](#module\_bucket) | terraform-aws-modules/s3-bucket/aws | 4.1.2 |
 | <a name="module_bucket_files"></a> [bucket\_files](#module\_bucket\_files) | ./objects | n/a |
 | <a name="module_iam_user"></a> [iam\_user](#module\_iam\_user) | dasmeta/modules/aws//modules/aws-iam-user | 0.36.1 |
 
@@ -107,6 +107,7 @@ module "my_bucket" {
 | <a name="input_block_public_acls"></a> [block\_public\_acls](#input\_block\_public\_acls) | Whether Amazon S3 should block public ACLs for this bucket. | `bool` | `false` | no |
 | <a name="input_block_public_policy"></a> [block\_public\_policy](#input\_block\_public\_policy) | Whether Amazon S3 should block public bucket policies for this bucket. | `bool` | `false` | no |
 | <a name="input_bucket_files"></a> [bucket\_files](#input\_bucket\_files) | Initial content for bucket, use acl and pattern params if you need more control. | <pre>object({<br>    path = string<br>  })</pre> | <pre>{<br>  "path": ""<br>}</pre> | no |
+| <a name="input_control_object_ownership"></a> [control\_object\_ownership](#input\_control\_object\_ownership) | Manage S3 Bucket Ownership Controls on this bucket or not. | `bool` | `false` | no |
 | <a name="input_create_iam_user"></a> [create\_iam\_user](#input\_create\_iam\_user) | Whether to create specific api access user to this created bucket. | `bool` | `false` | no |
 | <a name="input_create_index_html"></a> [create\_index\_html](#input\_create\_index\_html) | Whether to create and initial index.html file with default data. | `bool` | `false` | no |
 | <a name="input_grant"></a> [grant](#input\_grant) | The ACL policy grant. NOTE: conflicts with 'acl'. | `any` | `[]` | no |
@@ -114,6 +115,7 @@ module "my_bucket" {
 | <a name="input_iam_user_name"></a> [iam\_user\_name](#input\_iam\_user\_name) | The name of user, NOTE: this is optional and if it is not passed in use place the name will be generated based on bucket name. | `string` | `""` | no |
 | <a name="input_ignore_public_acls"></a> [ignore\_public\_acls](#input\_ignore\_public\_acls) | Whether Amazon S3 should ignore public ACLs for this bucket. | `bool` | `false` | no |
 | <a name="input_name"></a> [name](#input\_name) | Bucket name. | `string` | n/a | yes |
+| <a name="input_object_ownership"></a> [object\_ownership](#input\_object\_ownership) | Object ownership. | `string` | `"BucketOwnerPreferred"` | no |
 | <a name="input_owner"></a> [owner](#input\_owner) | The Bucket owner's display name and ID. NOTE: Conflicts with 'acl'. | `map(string)` | `{}` | no |
 | <a name="input_restrict_public_buckets"></a> [restrict\_public\_buckets](#input\_restrict\_public\_buckets) | Whether Amazon S3 should restrict public bucket policies for this bucket. | `bool` | `false` | no |
 | <a name="input_versioning"></a> [versioning](#input\_versioning) | The versioning configuration for the created bucket. | `map(string)` | `{}` | no |
