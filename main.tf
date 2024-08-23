@@ -1,6 +1,6 @@
 locals {
   # do not enable public acl if only public is requested (this is to not modify the interface)
-  acl = strcontains(var.acl, "public") ? "null" : var.acl
+  acl = var.acl == "public" ? "null" : var.acl
 
   is_public = strcontains(var.acl, "public")
 }
