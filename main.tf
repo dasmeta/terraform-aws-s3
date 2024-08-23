@@ -7,7 +7,7 @@ locals {
 
 module "bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
-  version = "3.1.0"
+  version = "4.1.2"
 
   bucket                   = var.name
   acl                      = local.acl
@@ -15,7 +15,8 @@ module "bucket" {
   restrict_public_buckets  = var.restrict_public_buckets
   block_public_acls        = var.block_public_acls
   block_public_policy      = var.block_public_policy
-  control_object_ownership = var.acl != null ? true : false
+  control_object_ownership = var.acl != null ? true : var.control_object_ownership
+  object_ownership         = var.object_ownership
 
   versioning = var.versioning
 
