@@ -10,7 +10,7 @@ Creates AWS S3 bucket and if there is need IAM user with appropriated accesses t
 
 module "my_bucket" {
   source = "dasmeta/s3/aws"
-  version = "2.0.0"
+  version = "1.2.1"
 
   name = "my-files-bucket"
 }
@@ -31,7 +31,7 @@ output "iam_user_arn" {
 ```terraform
 module "my_bucket" {
   source = "dasmeta/s3/aws"
-  version = "2.0.0"
+  version = "1.2.1"
 
   name = "my-files-bucket"
 
@@ -53,7 +53,7 @@ module "my_bucket" {
 ```terraform
 module "my_bucket" {
   source = "dasmeta/s3/aws"
-  version = "2.0.0"
+  version = "1.2.1"
 
   name = "my-website"
 
@@ -125,10 +125,12 @@ module "my_bucket" {
 
 | Name | Description |
 |------|-------------|
+| <a name="output_bucket_regional_domain_name"></a> [bucket\_regional\_domain\_name](#output\_bucket\_regional\_domain\_name) | The bucket regional domain name |
 | <a name="output_iam_access_key_id"></a> [iam\_access\_key\_id](#output\_iam\_access\_key\_id) | The access key ID |
 | <a name="output_iam_access_key_secret"></a> [iam\_access\_key\_secret](#output\_iam\_access\_key\_secret) | The access key secret |
 | <a name="output_iam_user_arn"></a> [iam\_user\_arn](#output\_iam\_user\_arn) | The ARN assigned by AWS for this user |
 | <a name="output_iam_user_name"></a> [iam\_user\_name](#output\_iam\_user\_name) | The user's name |
+| <a name="output_s3_bucket_arn"></a> [s3\_bucket\_arn](#output\_s3\_bucket\_arn) | The bucket arn |
 | <a name="output_s3_bucket_id"></a> [s3\_bucket\_id](#output\_s3\_bucket\_id) | The bucket name |
 | <a name="output_s3_bucket_website_endpoint"></a> [s3\_bucket\_website\_endpoint](#output\_s3\_bucket\_website\_endpoint) | The website endpoint associated to created s3 bucket |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

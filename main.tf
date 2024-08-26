@@ -33,12 +33,13 @@ resource "aws_s3_object" "index" {
   bucket       = module.bucket.s3_bucket_id
   key          = "index.html"
   content      = "OK, ${module.bucket.s3_bucket_id}"
-  acl          = "public-read"
+  acl          = var.acl
   content_type = "text/html"
 
   lifecycle {
     ignore_changes = [
-      content
+      content,
+      acl
     ]
   }
 }
@@ -51,6 +52,6 @@ module "bucket_files" {
 
   bucket  = module.bucket.s3_bucket_id
   path    = var.bucket_files.path
-  acl     = try(var.bucket_files.acl, "public-read")
+  acl     = try(var.bucket_files.acl, var.acl)
   pattern = try(var.bucket_files.pattern, "**")
 }
