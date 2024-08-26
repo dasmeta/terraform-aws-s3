@@ -3,9 +3,19 @@ output "s3_bucket_id" {
   value       = module.bucket.s3_bucket_id
 }
 
+output "s3_bucket_arn" {
+  description = "The bucket arn"
+  value       = module.bucket.s3_bucket_arn
+}
+
 output "s3_bucket_website_endpoint" {
   description = "The website endpoint associated to created s3 bucket"
   value       = module.bucket.s3_bucket_website_endpoint
+}
+
+output "bucket_regional_domain_name" {
+  description = "The bucket regional domain name"
+  value       = module.bucket.s3_bucket_bucket_regional_domain_name
 }
 
 output "iam_user_name" {
