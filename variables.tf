@@ -112,3 +112,9 @@ variable "bucket_files" {
   }
   description = "Initial content for bucket, use acl and pattern params if you need more control."
 }
+
+variable "cors_rule" {
+  description = "List of maps containing rules for Cross-Origin Resource Sharing."
+  type        = any
+  default     = []
+}
