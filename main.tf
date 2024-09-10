@@ -17,6 +17,7 @@ module "bucket" {
   block_public_policy      = var.block_public_policy
   control_object_ownership = var.acl != null ? true : var.control_object_ownership
   object_ownership         = var.object_ownership
+  cors_rule                = var.cors_rule
 
   versioning = var.versioning
 
