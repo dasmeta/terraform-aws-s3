@@ -23,7 +23,7 @@ data "aws_iam_policy_document" "queue" {
 resource "aws_sqs_queue" "queue" {
   count = var.event_notification_config.target_type == "sqs" ? 1 : 0
 
-  name   = replace("${var.name}${var.event_notification_config.name_suffix}", ".", "_")
+  name   = replace("${var.name}${var.event_notification_config.name_suffix}", "\W+", "_")
   policy = data.aws_iam_policy_document.queue[0].json
 }
 
