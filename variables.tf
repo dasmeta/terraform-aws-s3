@@ -133,3 +133,15 @@ variable "event_notification_config" {
     events        = ["s3:ObjectCreated:*"]
   }
 }
+
+variable "policy" {
+  description = "Bucket policies to be attached to the bucket in case custom policies are needed for the bucket"
+  type        = any
+  default     = "" # Default case is empty, to be compatibile with the previous behavior
+}
+
+variable "attach_policy" {
+  description = "Flag to control if the policy should be attached to the bucket"
+  type        = bool
+  default     = false
+}
