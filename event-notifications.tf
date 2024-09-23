@@ -1,5 +1,5 @@
 data "aws_iam_policy_document" "queue" {
-  count = var.event-notification-config.target_type == "sqs" ? 1 : 0
+  count = var.event_notification_config.target_type == "sqs" ? 1 : 0
 
   statement {
     effect = "Allow"
@@ -10,7 +10,7 @@ data "aws_iam_policy_document" "queue" {
     }
 
     actions   = ["sqs:SendMessage"]
-    resources = ["arn:aws:sqs:*:*:${var.event-notification-config.queue_name}"]
+    resources = ["arn:aws:sqs:*:*:${var.name}${var.event_notification_config.name_suffix}}"]
 
     condition {
       test     = "ArnEquals"
@@ -21,21 +21,21 @@ data "aws_iam_policy_document" "queue" {
 }
 
 resource "aws_sqs_queue" "queue" {
-  count = var.event-notification-config.target_type == "sqs" ? 1 : 0
+  count = var.event_notification_config.target_type == "sqs" ? 1 : 0
 
-  name   = var.event-notification-config.queue_name
+  name   = "${var.name}${var.event_notification_config.name_suffix}"
   policy = data.aws_iam_policy_document.queue[0].json
 }
 
 
 resource "aws_s3_bucket_notification" "bucket_notification" {
-  count = var.event-notification-config.target_type == "sqs" ? 1 : 0
+  count = var.event_notification_config.target_type == "sqs" ? 1 : 0
 
   bucket = module.bucket.s3_bucket_id
 
   queue {
     queue_arn     = aws_sqs_queue.queue[0].arn
-    events        = var.event-notification-config.events
-    filter_prefix = var.event-notification-config.filter_prefix
+    events        = var.event_notification_config.events
+    filter_prefix = var.event_notification_config.filter_prefix
   }
 }

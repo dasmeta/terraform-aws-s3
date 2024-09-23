@@ -3,9 +3,9 @@ module "private" {
 
   name = "dasmeta-dev-private"
 
-  event-notification-config = {
+  event_notification_config = {
     target_type   = "sqs"
-    queue_name    = "test"
+    name_suffix   = "test"
     filter_prefix = "test/"
     events        = ["s3:ObjectCreated:CompleteMultipartUpload"]
   }

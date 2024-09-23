@@ -119,16 +119,16 @@ variable "cors_rule" {
   default     = []
 }
 
-variable "event-notification-config" {
+variable "event_notification_config" {
   type = object({
-    target_type   = string,
-    queue_name    = string,
+    target_type   = string, // S3 event target types can be sqs and null now other we need to implement
+    name_suffix   = string, // Add suffix for name
     filter_prefix = string,
     events        = optional(list(string), ["s3:ObjectCreated:*"])
   })
   default = {
     target_type   = "null"
-    queue_name    = "test"
+    name_suffix   = "test"
     filter_prefix = "test/"
     events        = ["s3:ObjectCreated:*"]
   }
