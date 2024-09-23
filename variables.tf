@@ -128,7 +128,7 @@ variable "event_notification_config" {
   })
   default = {
     target_type   = "null"
-    name_suffix   = "test"
+    name_suffix   = "event"
     filter_prefix = "test/"
     events        = ["s3:ObjectCreated:*"]
   }
