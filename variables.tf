@@ -118,3 +118,18 @@ variable "cors_rule" {
   type        = any
   default     = []
 }
+
+variable "event-notification-config" {
+  type = object({
+    target_type   = string,
+    queue_name    = string,
+    filter_prefix = string,
+    events        = optional(list(string), ["s3:ObjectCreated:*"])
+  })
+  default = {
+    target_type   = "null"
+    queue_name    = "test"
+    filter_prefix = "test/"
+    events        = ["s3:ObjectCreated:*"]
+  }
+}
