@@ -10,7 +10,7 @@ data "aws_iam_policy_document" "queue" {
     }
 
     actions   = ["sqs:SendMessage"]
-    resources = ["arn:aws:sqs:*:*:s3-event-notification-queue"]
+    resources = ["arn:aws:sqs:*:*:${var.event-notification-config.queue_name}"]
 
     condition {
       test     = "ArnEquals"
