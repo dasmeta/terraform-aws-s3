@@ -1,17 +1,23 @@
+
+provider "aws" {
+  region = "eu-central-1"
+}
+
 module "external-policies" {
   source = "../.."
 
-  name = "policies-bucket"
+  acl = "private"
+  name = "policies-bucket-example-wpas"
   attach_policy = true
 
-  policy = {
+  policy = jsonencode({
     "Version": "2012-10-17",
 	"Statement": [
 		{
-			"Sid": "module-test-statID",
+			"Sid": "module-test-statID-stqw",
 			"Effect": "Allow",
 			"Principal": {
-				"AWS": "arn:aws:iam::*:user/*"
+				"AWS": "*"
 			},
 			"Action": [
 				"s3:GetObject",
@@ -20,10 +26,10 @@ module "external-policies" {
 				"s3:ListBucket",
 			],
 			"Resource": [
-				"arn:aws:s3:::policies-bucket",
-				"arn:aws:s3:::policies-bucket/*"
+				"arn:aws:s3:::policies-bucket-example-wpas",
+				"arn:aws:s3:::policies-bucket-example-wpas/*",
 			]
 		}
 	]
-  }
+  })
 }
