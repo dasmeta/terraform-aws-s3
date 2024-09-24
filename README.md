@@ -96,8 +96,12 @@ module "my_bucket" {
 
 | Name | Type |
 |------|------|
+| [aws_s3_bucket_notification.bucket_notification](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_notification) | resource |
 | [aws_s3_object.index](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_object) | resource |
+| [aws_sqs_queue.queue](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sqs_queue) | resource |
+| [aws_iam_policy_document.bucket_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.public](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.queue](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
 
@@ -106,12 +110,15 @@ module "my_bucket" {
 | <a name="input_acl"></a> [acl](#input\_acl) | The acl config for bucket, NOTE: 'acl' conflicts with 'grant' and 'owner'. | `string` | `"private"` | no |
 | <a name="input_block_public_acls"></a> [block\_public\_acls](#input\_block\_public\_acls) | Whether Amazon S3 should block public ACLs for this bucket. | `bool` | `false` | no |
 | <a name="input_block_public_policy"></a> [block\_public\_policy](#input\_block\_public\_policy) | Whether Amazon S3 should block public bucket policies for this bucket. | `bool` | `false` | no |
-| <a name="input_bucket_files"></a> [bucket\_files](#input\_bucket\_files) | Initial content for bucket, use acl and pattern params if you need more control. | <pre>object({<br>    path = string<br>  })</pre> | <pre>{<br>  "path": ""<br>}</pre> | no |
+| <a name="input_bucket_files"></a> [bucket\_files](#input\_bucket\_files) | Initial content for bucket, use acl and pattern params if you need more control. | <pre>object({<br/>    path = string<br/>  })</pre> | <pre>{<br/>  "path": ""<br/>}</pre> | no |
+| <a name="input_bucket_iam_policy"></a> [bucket\_iam\_policy](#input\_bucket\_iam\_policy) | AWS bucket policy | <pre>list(object({<br/>    effect     = optional(string, "Allow") # Effect of the policy (Allow or Deny)<br/>    actions    = list(string)              # Actions like sts:AssumeRole<br/>    principals = any                       # Principals (e.g., AWS, Service, Federated)<br/>    conditions = optional(any, [])         # Optional conditions for assume role<br/>  }))</pre> | `[]` | no |
 | <a name="input_control_object_ownership"></a> [control\_object\_ownership](#input\_control\_object\_ownership) | Manage S3 Bucket Ownership Controls on this bucket or not. | `bool` | `false` | no |
+| <a name="input_cors_rule"></a> [cors\_rule](#input\_cors\_rule) | List of maps containing rules for Cross-Origin Resource Sharing. | `any` | `[]` | no |
 | <a name="input_create_iam_user"></a> [create\_iam\_user](#input\_create\_iam\_user) | Whether to create specific api access user to this created bucket. | `bool` | `false` | no |
 | <a name="input_create_index_html"></a> [create\_index\_html](#input\_create\_index\_html) | Whether to create and initial index.html file with default data. | `bool` | `false` | no |
+| <a name="input_event_notification_config"></a> [event\_notification\_config](#input\_event\_notification\_config) | n/a | <pre>object({<br/>    target_type   = string,                                        // Target type for the S3 event notification, can be "sqs" or "null". Other target types can be implemented in the future.<br/>    name_suffix   = string,                                        // Suffix to add to the target name.<br/>    filter_prefix = string,                                        // Prefix to filter object key names for the event notification.<br/>    events        = optional(list(string), ["s3:ObjectCreated:*"]) // List of S3 events that trigger the notification. Defaults to "s3:ObjectCreated:*".<br/>  })</pre> | <pre>{<br/>  "events": [<br/>    "s3:ObjectCreated:*"<br/>  ],<br/>  "filter_prefix": "test/",<br/>  "name_suffix": "event",<br/>  "target_type": "null"<br/>}</pre> | no |
 | <a name="input_grant"></a> [grant](#input\_grant) | The ACL policy grant. NOTE: conflicts with 'acl'. | `any` | `[]` | no |
-| <a name="input_iam_user_actions"></a> [iam\_user\_actions](#input\_iam\_user\_actions) | The allowed actions that created user can perform on this created bucket. | `list(string)` | <pre>[<br>  "s3:PutObject",<br>  "s3:ListBucket",<br>  "s3:GetObject",<br>  "s3:GetObjectVersion",<br>  "s3:GetBucketAcl",<br>  "s3:DeleteObject",<br>  "s3:DeleteObjectVersion",<br>  "s3:PutLifecycleConfiguration",<br>  "s3:PutObjectAcl"<br>]</pre> | no |
+| <a name="input_iam_user_actions"></a> [iam\_user\_actions](#input\_iam\_user\_actions) | The allowed actions that created user can perform on this created bucket. | `list(string)` | <pre>[<br/>  "s3:PutObject",<br/>  "s3:ListBucket",<br/>  "s3:GetObject",<br/>  "s3:GetObjectVersion",<br/>  "s3:GetBucketAcl",<br/>  "s3:DeleteObject",<br/>  "s3:DeleteObjectVersion",<br/>  "s3:PutLifecycleConfiguration",<br/>  "s3:PutObjectAcl"<br/>]</pre> | no |
 | <a name="input_iam_user_name"></a> [iam\_user\_name](#input\_iam\_user\_name) | The name of user, NOTE: this is optional and if it is not passed in use place the name will be generated based on bucket name. | `string` | `""` | no |
 | <a name="input_ignore_public_acls"></a> [ignore\_public\_acls](#input\_ignore\_public\_acls) | Whether Amazon S3 should ignore public ACLs for this bucket. | `bool` | `false` | no |
 | <a name="input_name"></a> [name](#input\_name) | Bucket name. | `string` | n/a | yes |

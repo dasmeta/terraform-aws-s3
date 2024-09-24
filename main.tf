@@ -19,7 +19,6 @@ module "bucket" {
   object_ownership         = var.object_ownership
   cors_rule                = var.cors_rule
 
-
   versioning = var.versioning
 
   website = var.website
