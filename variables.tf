@@ -134,14 +134,14 @@ variable "event_notification_config" {
   }
 }
 
-variable "policy" {
-  description = "Bucket policies to be attached to the bucket in case custom policies are needed for the bucket"
-  type        = any
-  default     = "" # Default case is empty, to be compatibile with the previous behavior
-}
 
-variable "attach_policy" {
-  description = "Flag to control if the policy should be attached to the bucket"
-  type        = bool
-  default     = false
+variable "bucket_iam_policy" {
+  type = list(object({
+    effect     = optional(string, "Allow") # Effect of the policy (Allow or Deny)
+    actions    = list(string)              # Actions like sts:AssumeRole
+    principals = any                       # Principals (e.g., AWS, Service, Federated)
+    conditions = optional(any, [])         # Optional conditions for assume role
+  }))
+  description = "AWS bucket policy"
+  default     = []
 }

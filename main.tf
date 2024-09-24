@@ -19,12 +19,13 @@ module "bucket" {
   object_ownership         = var.object_ownership
   cors_rule                = var.cors_rule
 
+
   versioning = var.versioning
 
   website = var.website
 
-  policy        = local.is_public ? data.aws_iam_policy_document.public[0].json : var.policy
-  attach_policy = local.is_public || var.attach_policy  // To Do: Add support for merging two policies
+  policy        = local.is_public ? data.aws_iam_policy_document.public[0].json : try(data.aws_iam_policy_document.bucket_policy.0.json, "")
+  attach_policy = local.is_public || length(var.bucket_iam_policy) > 0 // To Do: Add support for merging two policies
 }
 
 // have initial index.html file content
