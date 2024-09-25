@@ -10,4 +10,3 @@ module "private" {
     events        = ["s3:ObjectCreated:CompleteMultipartUpload"]
   }
 }
-

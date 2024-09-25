@@ -23,8 +23,8 @@ module "bucket" {
 
   website = var.website
 
-  policy        = local.is_public ? data.aws_iam_policy_document.public[0].json : ""
-  attach_policy = local.is_public
+  policy        = local.is_public ? data.aws_iam_policy_document.public[0].json : try(data.aws_iam_policy_document.bucket_policy.0.json, "")
+  attach_policy = local.is_public || length(var.bucket_iam_policy) > 0 // To Do: Add support for merging two policies
 }
 
 // have initial index.html file content
