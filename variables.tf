@@ -145,3 +145,12 @@ variable "bucket_iam_policy" {
   description = "AWS bucket policy"
   default     = []
 }
+
+variable "bucket_intelligent_tiering" {
+  type = list(object({
+    tier = string
+    days = number
+  }))
+  default     = []
+  description = "Intelligent lifecycle policy"
+}
