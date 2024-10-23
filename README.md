@@ -96,6 +96,7 @@ module "my_bucket" {
 
 | Name | Type |
 |------|------|
+| [aws_s3_bucket_intelligent_tiering_configuration.bucket_intelligent_tiering](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_intelligent_tiering_configuration) | resource |
 | [aws_s3_bucket_notification.bucket_notification](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_notification) | resource |
 | [aws_s3_object.index](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_object) | resource |
 | [aws_sqs_queue.queue](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sqs_queue) | resource |
@@ -112,6 +113,7 @@ module "my_bucket" {
 | <a name="input_block_public_policy"></a> [block\_public\_policy](#input\_block\_public\_policy) | Whether Amazon S3 should block public bucket policies for this bucket. | `bool` | `false` | no |
 | <a name="input_bucket_files"></a> [bucket\_files](#input\_bucket\_files) | Initial content for bucket, use acl and pattern params if you need more control. | <pre>object({<br/>    path = string<br/>  })</pre> | <pre>{<br/>  "path": ""<br/>}</pre> | no |
 | <a name="input_bucket_iam_policy"></a> [bucket\_iam\_policy](#input\_bucket\_iam\_policy) | AWS bucket policy | <pre>list(object({<br/>    effect     = optional(string, "Allow") # Effect of the policy (Allow or Deny)<br/>    actions    = list(string)              # Actions like sts:AssumeRole<br/>    principals = any                       # Principals (e.g., AWS, Service, Federated)<br/>    conditions = optional(any, [])         # Optional conditions for assume role<br/>  }))</pre> | `[]` | no |
+| <a name="input_bucket_intelligent_tiering"></a> [bucket\_intelligent\_tiering](#input\_bucket\_intelligent\_tiering) | Intelligent lifecycle policy | <pre>list(object({<br/>    tier = string<br/>    days = number<br/>  }))</pre> | `[]` | no |
 | <a name="input_control_object_ownership"></a> [control\_object\_ownership](#input\_control\_object\_ownership) | Manage S3 Bucket Ownership Controls on this bucket or not. | `bool` | `false` | no |
 | <a name="input_cors_rule"></a> [cors\_rule](#input\_cors\_rule) | List of maps containing rules for Cross-Origin Resource Sharing. | `any` | `[]` | no |
 | <a name="input_create_iam_user"></a> [create\_iam\_user](#input\_create\_iam\_user) | Whether to create specific api access user to this created bucket. | `bool` | `false` | no |
