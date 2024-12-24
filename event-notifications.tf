@@ -10,7 +10,7 @@ data "aws_iam_policy_document" "queue" {
     }
 
     actions   = ["sqs:SendMessage"]
-    resources = ["arn:aws:sqs:*:*:${var.name}${var.event_notification_config.name_suffix}}"]
+    resources = ["arn:aws:sqs:*:*:${replace("${var.name}-${var.event_notification_config.name_suffix}", "/\\W+/", "_")}"]
 
     condition {
       test     = "ArnEquals"
@@ -23,7 +23,7 @@ data "aws_iam_policy_document" "queue" {
 resource "aws_sqs_queue" "queue" {
   count = var.event_notification_config.target_type == "sqs" ? 1 : 0
 
-  name   = replace("${var.name}${var.event_notification_config.name_suffix}", "/\\W+/", "_")
+  name   = replace("${var.name}-${var.event_notification_config.name_suffix}", "/\\W+/", "_")
   policy = data.aws_iam_policy_document.queue[0].json
 }
 
