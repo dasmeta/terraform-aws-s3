@@ -152,5 +152,11 @@ variable "bucket_intelligent_tiering" {
     days = number
   }))
   default     = []
-  description = "Intelligent lifecycle policy"
+  description = "Intelligent lifecycle policy. This can be used to automatically archive objects based on days"
+}
+
+variable "lifecycle_rules" {
+  description = "List of maps containing configuration of object lifecycle management. This can be used to remove expired object based on days and date"
+  type        = any
+  default     = []
 }
