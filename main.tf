@@ -7,7 +7,7 @@ locals {
 
 module "bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
-  version = "4.1.2"
+  version = "4.8.0"
 
   bucket                   = var.name
   acl                      = local.acl
@@ -23,8 +23,9 @@ module "bucket" {
 
   website = var.website
 
-  policy        = local.is_public ? data.aws_iam_policy_document.public[0].json : try(data.aws_iam_policy_document.bucket_policy.0.json, "")
-  attach_policy = local.is_public || length(var.bucket_iam_policy) > 0 // To Do: Add support for merging two policies
+  policy         = local.is_public ? data.aws_iam_policy_document.public[0].json : try(data.aws_iam_policy_document.bucket_policy.0.json, "")
+  attach_policy  = local.is_public || length(var.bucket_iam_policy) > 0 // To Do: Add support for merging two policies
+  lifecycle_rule = var.lifecycle_rules
 }
 
 // have initial index.html file content
