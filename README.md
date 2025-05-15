@@ -88,7 +88,7 @@ module "my_bucket" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_bucket"></a> [bucket](#module\_bucket) | terraform-aws-modules/s3-bucket/aws | 4.1.2 |
+| <a name="module_bucket"></a> [bucket](#module\_bucket) | terraform-aws-modules/s3-bucket/aws | 4.8.0 |
 | <a name="module_bucket_files"></a> [bucket\_files](#module\_bucket\_files) | ./objects | n/a |
 | <a name="module_iam_user"></a> [iam\_user](#module\_iam\_user) | dasmeta/modules/aws//modules/aws-iam-user | 0.36.1 |
 
@@ -113,7 +113,7 @@ module "my_bucket" {
 | <a name="input_block_public_policy"></a> [block\_public\_policy](#input\_block\_public\_policy) | Whether Amazon S3 should block public bucket policies for this bucket. | `bool` | `false` | no |
 | <a name="input_bucket_files"></a> [bucket\_files](#input\_bucket\_files) | Initial content for bucket, use acl and pattern params if you need more control. | <pre>object({<br/>    path = string<br/>  })</pre> | <pre>{<br/>  "path": ""<br/>}</pre> | no |
 | <a name="input_bucket_iam_policy"></a> [bucket\_iam\_policy](#input\_bucket\_iam\_policy) | AWS bucket policy | <pre>list(object({<br/>    effect     = optional(string, "Allow") # Effect of the policy (Allow or Deny)<br/>    actions    = list(string)              # Actions like sts:AssumeRole<br/>    principals = any                       # Principals (e.g., AWS, Service, Federated)<br/>    conditions = optional(any, [])         # Optional conditions for assume role<br/>  }))</pre> | `[]` | no |
-| <a name="input_bucket_intelligent_tiering"></a> [bucket\_intelligent\_tiering](#input\_bucket\_intelligent\_tiering) | Intelligent lifecycle policy | <pre>list(object({<br/>    tier = string<br/>    days = number<br/>  }))</pre> | `[]` | no |
+| <a name="input_bucket_intelligent_tiering"></a> [bucket\_intelligent\_tiering](#input\_bucket\_intelligent\_tiering) | Intelligent lifecycle policy. This can be used to automatically archive objects based on days | <pre>list(object({<br/>    tier = string<br/>    days = number<br/>  }))</pre> | `[]` | no |
 | <a name="input_control_object_ownership"></a> [control\_object\_ownership](#input\_control\_object\_ownership) | Manage S3 Bucket Ownership Controls on this bucket or not. | `bool` | `false` | no |
 | <a name="input_cors_rule"></a> [cors\_rule](#input\_cors\_rule) | List of maps containing rules for Cross-Origin Resource Sharing. | `any` | `[]` | no |
 | <a name="input_create_iam_user"></a> [create\_iam\_user](#input\_create\_iam\_user) | Whether to create specific api access user to this created bucket. | `bool` | `false` | no |
@@ -123,6 +123,7 @@ module "my_bucket" {
 | <a name="input_iam_user_actions"></a> [iam\_user\_actions](#input\_iam\_user\_actions) | The allowed actions that created user can perform on this created bucket. | `list(string)` | <pre>[<br/>  "s3:PutObject",<br/>  "s3:ListBucket",<br/>  "s3:GetObject",<br/>  "s3:GetObjectVersion",<br/>  "s3:GetBucketAcl",<br/>  "s3:DeleteObject",<br/>  "s3:DeleteObjectVersion",<br/>  "s3:PutLifecycleConfiguration",<br/>  "s3:PutObjectAcl"<br/>]</pre> | no |
 | <a name="input_iam_user_name"></a> [iam\_user\_name](#input\_iam\_user\_name) | The name of user, NOTE: this is optional and if it is not passed in use place the name will be generated based on bucket name. | `string` | `""` | no |
 | <a name="input_ignore_public_acls"></a> [ignore\_public\_acls](#input\_ignore\_public\_acls) | Whether Amazon S3 should ignore public ACLs for this bucket. | `bool` | `false` | no |
+| <a name="input_lifecycle_rules"></a> [lifecycle\_rules](#input\_lifecycle\_rules) | List of maps containing configuration of object lifecycle management. This can be used to remove expired object based on days and date | `any` | `[]` | no |
 | <a name="input_name"></a> [name](#input\_name) | Bucket name. | `string` | n/a | yes |
 | <a name="input_object_ownership"></a> [object\_ownership](#input\_object\_ownership) | Object ownership. | `string` | `"BucketOwnerPreferred"` | no |
 | <a name="input_owner"></a> [owner](#input\_owner) | The Bucket owner's display name and ID. NOTE: Conflicts with 'acl'. | `map(string)` | `{}` | no |
