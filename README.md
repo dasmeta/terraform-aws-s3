@@ -76,20 +76,20 @@ module "my_bucket" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.0, < 7.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 5.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.0, < 7.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_bucket"></a> [bucket](#module\_bucket) | terraform-aws-modules/s3-bucket/aws | 4.8.0 |
-| <a name="module_bucket_files"></a> [bucket\_files](#module\_bucket\_files) | ./objects | n/a |
+| <a name="module_bucket_files"></a> [bucket\_files](#module\_bucket\_files) | ./modules/objects | n/a |
 | <a name="module_iam_user"></a> [iam\_user](#module\_iam\_user) | dasmeta/modules/aws//modules/aws-iam-user | 0.36.1 |
 
 ## Resources

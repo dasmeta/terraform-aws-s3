@@ -1,6 +1,5 @@
 # allows to create S3 bucket content by syncing all the files in local folder to s3 as separate state having item
 
-# TODO: have this as submodule int our future s3 separate module
 
 ## example how it can be used
 
@@ -16,13 +15,15 @@ module "bucket_files" {
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.0, < 7.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.0, < 7.0 |
 
 ## Modules
 

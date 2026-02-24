@@ -48,7 +48,7 @@ resource "aws_s3_object" "index" {
 
 // have/create some more init files into bucket
 module "bucket_files" {
-  source = "./objects"
+  source = "./modules/objects"
 
   count = try(var.bucket_files.path, "") != "" ? 1 : 0
 
