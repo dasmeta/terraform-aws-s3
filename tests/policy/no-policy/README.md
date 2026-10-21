@@ -12,7 +12,7 @@ No providers.
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_no-policies"></a> [no-policies](#module\_no-policies) | ../../.. | n/a |
 
 ## Resources
