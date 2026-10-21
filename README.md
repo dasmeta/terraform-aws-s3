@@ -71,6 +71,33 @@ module "my_bucket" {
 }
 ```
 
+## Configure CORS on an existing bucket
+
+Use the `//modules/cors` child module when the bucket is already managed elsewhere and only its CORS configuration should be managed here. The child module does not create or change the bucket.
+
+S3 has one complete CORS configuration per bucket. This module owns the full rule set; do not use it alongside another Terraform state or the root module's `cors_rule` input for the same bucket.
+
+```terraform
+module "existing_bucket_cors" {
+  source = "dasmeta/s3/aws//modules/cors"
+
+  bucket                = "existing-upload-bucket"
+  expected_bucket_owner = "123456789012"
+
+  cors_rule = [
+    {
+      allowed_methods = ["POST", "PUT"]
+      allowed_origins = ["https://admin.example.com"]
+      allowed_headers = ["*"]
+      expose_headers  = ["ETag", "Location"]
+      max_age_seconds = 3000
+    }
+  ]
+}
+```
+
+See [the existing-bucket CORS example](examples/existing-bucket-cors/1-example.tf) for the provider setup and usage.
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
