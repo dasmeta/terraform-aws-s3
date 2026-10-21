@@ -3,6 +3,36 @@ variable "name" {
   description = "Bucket name."
 }
 
+variable "expected_bucket_owner" {
+  type        = string
+  default     = null
+  description = "AWS account ID expected to own the bucket and its configuration."
+}
+
+variable "tags" {
+  type        = map(string)
+  default     = {}
+  description = "Tags to assign to the bucket."
+}
+
+variable "attach_public_access_block" {
+  type        = bool
+  default     = true
+  description = "Whether to manage an S3 bucket public access block configuration. Set false when importing a bucket without one."
+}
+
+variable "bucket_policy_json" {
+  type        = string
+  default     = null
+  description = "Complete bucket policy JSON. Overrides the generated public or bucket_iam_policy document when set."
+}
+
+variable "server_side_encryption_configuration" {
+  type        = any
+  default     = {}
+  description = "Map containing server-side encryption configuration for the bucket."
+}
+
 variable "acl" {
   type        = string
   default     = "private"
