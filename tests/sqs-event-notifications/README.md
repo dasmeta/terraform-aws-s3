@@ -12,7 +12,7 @@ No providers.
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_private"></a> [private](#module\_private) | ../.. | n/a |
 
 ## Resources
