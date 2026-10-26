@@ -16,13 +16,13 @@ module "bucket_files" {
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.0, < 7.0 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.0, < 7.0 |
 
 ## Modules
@@ -32,13 +32,13 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_s3_object.bucket_files](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_object) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_acl"></a> [acl](#input\_acl) | ACL for files be created in S3 bucket. | `string` | `"public-read"` | no |
 | <a name="input_bucket"></a> [bucket](#input\_bucket) | Bucket name. | `string` | n/a | yes |
 | <a name="input_path"></a> [path](#input\_path) | Path to folder which will be pushed into bucket. | `string` | n/a | yes |

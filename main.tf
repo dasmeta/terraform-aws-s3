@@ -9,22 +9,26 @@ module "bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
   version = "4.8.0"
 
-  bucket                   = var.name
-  acl                      = local.acl
-  ignore_public_acls       = var.ignore_public_acls
-  restrict_public_buckets  = var.restrict_public_buckets
-  block_public_acls        = var.block_public_acls
-  block_public_policy      = var.block_public_policy
-  control_object_ownership = var.acl != null ? true : var.control_object_ownership
-  object_ownership         = var.object_ownership
-  cors_rule                = var.cors_rule
+  bucket                               = var.name
+  expected_bucket_owner                = var.expected_bucket_owner
+  acl                                  = local.acl
+  tags                                 = var.tags
+  attach_public_policy                 = var.attach_public_access_block
+  ignore_public_acls                   = var.ignore_public_acls
+  restrict_public_buckets              = var.restrict_public_buckets
+  block_public_acls                    = var.block_public_acls
+  block_public_policy                  = var.block_public_policy
+  control_object_ownership             = var.acl != null ? true : var.control_object_ownership
+  object_ownership                     = var.object_ownership
+  cors_rule                            = var.cors_rule
+  server_side_encryption_configuration = var.server_side_encryption_configuration
 
   versioning = var.versioning
 
   website = var.website
 
-  policy         = local.is_public ? data.aws_iam_policy_document.public[0].json : try(data.aws_iam_policy_document.bucket_policy.0.json, "")
-  attach_policy  = local.is_public || length(var.bucket_iam_policy) > 0 // To Do: Add support for merging two policies
+  policy         = var.bucket_policy_json != null ? var.bucket_policy_json : (local.is_public ? data.aws_iam_policy_document.public[0].json : try(data.aws_iam_policy_document.bucket_policy.0.json, ""))
+  attach_policy  = var.bucket_policy_json != null || local.is_public || length(var.bucket_iam_policy) > 0 // To Do: Add support for merging two policies
   lifecycle_rule = var.lifecycle_rules
 }
 
