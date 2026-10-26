@@ -102,7 +102,17 @@ See [the existing-bucket CORS example](examples/existing-bucket-cors/1-example.t
 
 The root module manages the bucket and its configured settings, including CORS. For an existing bucket, record its live ACL, ownership controls, policy, public access block, encryption, tags, and CORS rules before configuring the module. `bucket_policy_json` can preserve a complete policy that the generated public policy or `bucket_iam_policy` cannot represent. It takes precedence over both generated policies. Set `attach_public_access_block = false` if the bucket has no public access block configuration.
 
-Import each configured S3 resource into the new workspace before applying. At minimum, an adopted bucket with an ACL, ownership controls, policy, encryption, and CORS needs the corresponding `module.bucket.aws_s3_bucket.this[0]`, `aws_s3_bucket_acl.this[0]`, `aws_s3_bucket_ownership_controls.this[0]`, `aws_s3_bucket_policy.this[0]`, `aws_s3_bucket_server_side_encryption_configuration.this[0]`, and `aws_s3_bucket_cors_configuration.this[0]` addresses imported. Review the resulting plan for changes to any existing bucket setting before applying it.
+Import each configured S3 resource into the new workspace before applying. When the root module is called as `module "<name>"`, use these consumer-side addresses for the resources that are enabled:
+
+- `module.<name>.module.bucket.aws_s3_bucket.this[0]`
+- `module.<name>.module.bucket.aws_s3_bucket_acl.this[0]`
+- `module.<name>.module.bucket.aws_s3_bucket_ownership_controls.this[0]`
+- `module.<name>.module.bucket.aws_s3_bucket_policy.this[0]`
+- `module.<name>.module.bucket.aws_s3_bucket_server_side_encryption_configuration.this[0]`
+- `module.<name>.module.bucket.aws_s3_bucket_cors_configuration.this[0]`
+- `module.<name>.module.bucket.aws_s3_bucket_public_access_block.this[0]` when `attach_public_access_block = true` (the default)
+
+Set `attach_public_access_block = false` when the existing bucket has no public access block. Otherwise, import its public access block and configure the `block_*`, `ignore_public_acls`, and `restrict_public_buckets` values to match the live settings. Review the resulting plan for changes to any existing bucket setting before applying it.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
